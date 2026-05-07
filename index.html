@@ -360,7 +360,7 @@ body.fade {
 <!-- SLIDE 2 VIDEO -->
 <div class="slide">
     <div class="video-container">
-        <video id="invVideo" autoplay loop muted playsinline controls>
+        <video id="invVideo" autoplay playsinline controls>
     <source src="kaizen.mp4" type="video/mp4">
 </video>
     </div>
@@ -423,6 +423,12 @@ function showSlide(i){
 }
 
 function nextSlide(){
+
+    const video = document.getElementById("invVideo");
+    if (video) {
+        video.pause();
+    }
+
     if(current < slides.length-1){
         current++;
         showSlide(current);
@@ -532,7 +538,16 @@ function submitRSVP() {
         message.innerHTML = "❌ Failed to send RSVP.";
 
     });
+	
+	const video = document.getElementById("invVideo");
 
+video.addEventListener("ended", () => {
+    video.pause();
+    video.currentTime = 0; // or leave it at last frame if you prefer
+});
+video.addEventListener("ended", () => {
+    video.pause();
+});
 }
 </script>
 
