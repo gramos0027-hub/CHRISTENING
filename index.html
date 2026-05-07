@@ -1,255 +1,41 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>Baby Invitation</title>
 
 <style>
-body {
-    margin: 0;
-    font-family: 'Poppins', sans-serif;
-    background: linear-gradient(to bottom, #eef7ff, #ffffff);
-    overflow-x: hidden;
-    text-align: center;
+body{
+    margin:0;
+    font-family:'Poppins',sans-serif;
+    background:linear-gradient(to bottom,#eef7ff,#ffffff);
+    overflow-x:hidden;
+    text-align:center;
+    transition:background 1s ease;
 }
 
 /* SLIDES */
-.slide {
-    display: none;
-    height: 100vh;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-    padding: 20px;
-    opacity: 0;
-    transform: translateY(20px);
-    transition: all 0.6s ease;
-}
-.slide.active {
-    display: flex;
-    opacity: 1;
-    transform: translateY(0);
-}
-
-/* ENVELOPE */
-.envelope {
-    position: relative;
-    width: 260px;
-    height: 160px;
-    background: linear-gradient(135deg, #6ec6ff, #3498db);
-    border-radius: 10px;
-    cursor: pointer;
-}
-.envelope::before {
-    content: "";
-    position: absolute;
-    top: -80px;
-    left: 0;
-    border-left: 130px solid transparent;
-    border-right: 130px solid transparent;
-    border-bottom: 80px solid #2e86c1;
-    transition: 0.6s;
-}
-.envelope.open::before {
-    transform: rotateX(180deg);
-}
-
-.seal {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    background: white;
-    width: 60px;
-    height: 60px;
-    border-radius: 50%;
-    display:flex;
-    align-items:center;
+.slide{
+    display:none;
+    min-height:100svh;
     justify-content:center;
-    font-size: 22px;
+    align-items:center;
+    flex-direction:column;
+    padding:20px;
+    opacity:0;
+    transform:translateY(20px);
+    transition:all .6s ease;
 }
 
-/* VIDEO FIX */
-.video-container {
-    width: 100%;
-    display: flex;
-    justify-content: center;
-}
-video {
-    width: 90%;
-    max-width: 400px; /* 🔥 FIXED SIZE */
-    border-radius: 20px;
+.slide.active{
+    display:flex;
+    opacity:1;
+    transform:translateY(0);
 }
 
-/* CARD */
-.card {
-    background: rgba(255,255,255,0.85);
-    padding: 30px;
-    border-radius: 20px;
-    backdrop-filter: blur(10px);
-}
-
-/* BUTTONS */
-button {
-    padding: 12px 20px;
-    border-radius: 25px;
-    border: none;
-    margin: 5px;
-    cursor: pointer;
-}
-.next { background: #3498db; color: white; }
-
-/* TEXT */
-.baby-name {
-    font-size: 42px;
-    animation: fadeIn 2s ease;
-}
-
-/* HEARTS */
-.heart {
-    position: fixed;
-    bottom: -10px;
-    font-size: 20px;
-    animation: floatUp 8s linear infinite;
-    opacity: 0.2;
-}
-@keyframes floatUp {
-    0% { transform: translateY(0); }
-    100% { transform: translateY(-120vh); }
-}
-@keyframes fadeIn {
-    from {opacity:0;}
-    to {opacity:1;}
-}
-
-/* RSVP CARD */
-.rsvp-card {
-    background: rgba(255,255,255,0.15);
-    backdrop-filter: blur(15px);
-    padding: 35px;
-    border-radius: 25px;
-    box-shadow: 0 20px 50px rgba(0,0,0,0.2);
-    max-width: 350px;
-    width: 90%;
-    animation: fadeUp 1s ease;
-}
-
-/* TITLE */
-.rsvp-card h2 {
-    margin-bottom: 20px;
-}
-
-/* OPTIONS */
-.rsvp-options {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-    margin-bottom: 20px;
-}
-
-.option-btn {
-    padding: 12px;
-    border-radius: 30px;
-    border: 2px solid #3498db;
-    background: transparent;
-    color: #3498db;
-    transition: 0.3s;
-    cursor: pointer;
-}
-
-.option-btn:hover {
-    transform: scale(1.05);
-}
-
-.option-btn.active {
-    background: #3498db;
-    color: white;
-    box-shadow: 0 5px 15px rgba(52,152,219,0.4);
-}
-
-/* FLOATING INPUT */
-.input-group {
-    position: relative;
-    margin-bottom: 20px;
-}
-
-.input-group input {
-    width: 100%;
-    padding: 12px;
-    border-radius: 10px;
-    border: none;
-    outline: none;
-}
-
-.input-group label {
-    position: absolute;
-    left: 12px;
-    top: 12px;
-    color: #888;
-    transition: 0.3s;
-}
-
-.input-group input:focus + label,
-.input-group input:valid + label {
-    top: -8px;
-    left: 8px;
-    font-size: 12px;
-    color: #3498db;
-}
-
-/* SUBMIT BUTTON */
-.submit-btn {
-    width: 100%;
-    padding: 12px;
-    border-radius: 30px;
-    border: none;
-    background: linear-gradient(135deg, #5dade2, #3498db);
-    color: white;
-    font-size: 16px;
-    cursor: pointer;
-    transition: 0.3s;
-}
-
-.submit-btn:hover {
-    transform: scale(1.05);
-}
-
-/* MESSAGE */
-#rsvpMessage {
-    margin-top: 15px;
-    font-size: 14px;
-}
-
-/* ANIMATION */
-@keyframes fadeUp {
-    from {
-        opacity: 0;
-        transform: translateY(30px);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
-.option-btn.active {
-    background: #3498db;
-    color: white;
-}
-.video-container {
-    width: 100%;
-    display: flex;
-    justify-content: center;
-}
-
-video {
-    width: 75%;          /* 🔥 smaller */
-    max-width: 280px;    /* 🔥 tighter limit */
-    border-radius: 20px;
-    box-shadow: 0 8px 20px rgba(0,0,0,0.15);
-}
 /* WRAPPER */
-.envelope-wrapper {
+.envelope-wrapper{
     display:flex;
     justify-content:center;
     align-items:center;
@@ -257,81 +43,292 @@ video {
     cursor:pointer;
 }
 
-/* FULL LETTER SCREEN */
-.letter-full {
-    background: rgba(255,255,255,0.95);
-    padding: 40px;
-    border-radius: 20px;
-    max-width: 400px;
-    box-shadow: 0 20px 50px rgba(0,0,0,0.2);
-    animation: fadeZoom 1s ease;
-}
-
-@keyframes fadeZoom {
-    from {
-        opacity: 0;
-        transform: scale(0.8);
-    }
-    to {
-        opacity: 1;
-        transform: scale(1);
-    }
-}
-
-/* DARK FADE EFFECT */
-body.fade {
-    background: #000;
-    transition: background 1s ease;
-}
 /* LUX ENVELOPE */
-.envelope-lux {
-    position: relative;
-    width: 270px;
-    height: 180px;
-    background: linear-gradient(135deg, #6ec6ff, #2e86c1);
-    border-radius: 12px;
-    box-shadow: 0 20px 40px rgba(0,0,0,0.25);
-    overflow: hidden;
+.envelope-lux{
+    position:relative;
+    width:270px;
+    height:180px;
+    background:linear-gradient(135deg,#6ec6ff,#2e86c1);
+    border-radius:12px;
+    box-shadow:0 20px 40px rgba(0,0,0,.25);
+    overflow:hidden;
 }
 
-.flap {
+/* FLAP */
+.flap{
     position:absolute;
     top:0;
     width:100%;
     height:100%;
-    background: linear-gradient(135deg, #3498db, #1f618d);
-    clip-path: polygon(0 0, 50% 60%, 100% 0);
-    transform-origin: top;
-    transition: transform 1s ease;
+    background:linear-gradient(135deg,#3498db,#1f618d);
+    clip-path:polygon(0 0,50% 60%,100% 0);
+    transform-origin:top;
+    transition:transform 1s ease;
+    backface-visibility:hidden;
+    transform-style:preserve-3d;
 }
 
-.envelope-lux.open .flap {
-    transform: rotateX(180deg);
+.envelope-lux.open .flap{
+    transform:rotateX(180deg);
+}
+
+/* SEAL */
+.seal{
+    position:absolute;
+    top:50%;
+    left:50%;
+    transform:translate(-50%,-50%);
+    background:white;
+    width:60px;
+    height:60px;
+    border-radius:50%;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:22px;
+    z-index:2;
+}
+
+/* LETTER */
+.letter-full{
+    background:rgba(255,255,255,.95);
+    padding:40px;
+    border-radius:20px;
+    max-width:400px;
+    box-shadow:0 20px 50px rgba(0,0,0,.2);
+    animation:fadeZoom 1s ease;
+}
+
+@keyframes fadeZoom{
+    from{
+        opacity:0;
+        transform:scale(.8);
+    }
+    to{
+        opacity:1;
+        transform:scale(1);
+    }
+}
+
+/* VIDEO */
+.video-container{
+    width:100%;
+    display:flex;
+    justify-content:center;
+}
+
+video{
+    width:75%;
+    max-width:280px;
+    border-radius:20px;
+    box-shadow:0 8px 20px rgba(0,0,0,.15);
+}
+
+/* CARD */
+.card{
+    background:rgba(255,255,255,.85);
+    padding:30px;
+    border-radius:20px;
+    backdrop-filter:blur(10px);
+}
+
+/* BUTTONS */
+button{
+    padding:12px 20px;
+    border-radius:25px;
+    border:none;
+    margin:5px;
+    cursor:pointer;
+    font-size:15px;
+}
+
+.next{
+    background:#3498db;
+    color:white;
+}
+
+/* RSVP CARD */
+.rsvp-card{
+    background:rgba(255,255,255,.15);
+    backdrop-filter:blur(15px);
+    padding:35px;
+    border-radius:25px;
+    box-shadow:0 20px 50px rgba(0,0,0,.2);
+    max-width:350px;
+    width:90%;
+    animation:fadeUp 1s ease;
+}
+
+/* TITLE */
+.rsvp-card h2{
+    margin-bottom:20px;
+}
+
+/* OPTIONS */
+.rsvp-options{
+    display:flex;
+    flex-direction:column;
+    gap:10px;
+    margin-bottom:20px;
+}
+
+.option-btn{
+    padding:12px;
+    border-radius:30px;
+    border:2px solid #3498db;
+    background:transparent;
+    color:#3498db;
+    transition:.3s;
+    cursor:pointer;
+}
+
+.option-btn:hover{
+    transform:scale(1.05);
+}
+
+.option-btn.active{
+    background:#3498db;
+    color:white;
+    box-shadow:0 5px 15px rgba(52,152,219,.4);
+}
+
+/* INPUTS */
+.input-group{
+    position:relative;
+    margin-bottom:20px;
+}
+
+.input-group input{
+    width:100%;
+    padding:12px;
+    border-radius:10px;
+    border:none;
+    outline:none;
+    box-sizing:border-box;
+    font-size:15px;
+}
+
+.input-group label{
+    position:absolute;
+    left:12px;
+    top:12px;
+    color:#888;
+    transition:.3s;
+    pointer-events:none;
+    background:white;
+    padding:0 5px;
+    border-radius:5px;
+}
+
+.input-group input:focus + label,
+.input-group input:valid + label{
+    top:-10px;
+    left:10px;
+    font-size:12px;
+    color:#3498db;
+}
+
+/* SUBMIT */
+.submit-btn{
+    width:100%;
+    padding:12px;
+    border-radius:30px;
+    border:none;
+    background:linear-gradient(135deg,#5dade2,#3498db);
+    color:white;
+    font-size:16px;
+    cursor:pointer;
+    transition:.3s;
+}
+
+.submit-btn:hover{
+    transform:scale(1.05);
+}
+
+/* MESSAGE */
+#rsvpMessage{
+    margin-top:15px;
+    font-size:14px;
+}
+
+/* HEARTS */
+.heart{
+    position:fixed;
+    bottom:-10px;
+    font-size:20px;
+    animation:floatUp 8s linear infinite;
+    opacity:.2;
+    pointer-events:none;
+}
+
+@keyframes floatUp{
+    0%{
+        transform:translateY(0);
+    }
+    100%{
+        transform:translateY(-120vh);
+    }
 }
 
 /* SPARKLES */
-.sparkle {
-    position: fixed;
-    font-size: 14px;
-    animation: sparkleFloat 2s linear forwards;
+.sparkle{
+    position:fixed;
+    font-size:14px;
+    animation:sparkleFloat 2s linear forwards;
+    pointer-events:none;
 }
 
-@keyframes sparkleFloat {
-    0% { opacity:1; transform:translateY(0);}
-    100% { opacity:0; transform:translateY(-100px);}
+@keyframes sparkleFloat{
+    0%{
+        opacity:1;
+        transform:translateY(0);
+    }
+    100%{
+        opacity:0;
+        transform:translateY(-100px);
+    }
+}
+
+/* ANIMATION */
+@keyframes fadeUp{
+    from{
+        opacity:0;
+        transform:translateY(30px);
+    }
+    to{
+        opacity:1;
+        transform:translateY(0);
+    }
+}
+
+/* MOBILE */
+@media(max-width:480px){
+
+    .letter-full{
+        padding:30px 20px;
+    }
+
+    .rsvp-card{
+        padding:25px 20px;
+    }
+
+    video{
+        width:90%;
+    }
 }
 </style>
 </head>
 
 <body>
 
+<!-- MUSIC -->
 <audio id="bgMusic" loop>
-<source src="Aventure.mp3" type="audio/mp3">
+    <source src="Aventure.mp3" type="audio/mp3">
 </audio>
 
 <!-- SLIDE 1 -->
-<!-- 🎬 CINEMATIC INTRO -->
 <div class="slide active" id="introSlide">
+
     <div class="envelope-wrapper" onclick="openCinematic()">
 
         <div class="envelope-lux">
@@ -340,83 +337,134 @@ body.fade {
         </div>
 
     </div>
+
 </div>
 
-<!-- 💌 LETTER SCREEN -->
+<!-- LETTER -->
 <div class="slide" id="letterSlide">
+
     <div class="letter-full">
+
         <h2>With Love and Joy 💙</h2>
+
         <p>
-            We are blessed with our baby boy,<br><br>
-            <strong>Jayce Kaizen</strong><br><br>
-            As he begins his journey in faith,  
+            We are blessed with our baby boy,
+            <br><br>
+
+            <strong>Jayce Kaizen</strong>
+
+            <br><br>
+
+            As he begins his journey in faith,
             we invite you to be part of this special moment.
         </p>
 
-        <button class="next" onclick="nextSlide()">Continue ⏭️</button>
+        <button type="button" class="next" onclick="nextSlide()">
+            Continue ⏭️
+        </button>
+
     </div>
+
 </div>
 
-<!-- SLIDE 2 VIDEO -->
+<!-- VIDEO -->
 <div class="slide">
+
     <div class="video-container">
-        <video id="invVideo" autoplay playsinline controls>
-    <source src="kaizen.mp4" type="video/mp4">
-</video>
+
+        <video id="invVideo" playsinline controls>
+            <source src="kaizen.mp4" type="video/mp4">
+        </video>
+
     </div>
 
+    <button type="button" class="next" onclick="nextSlide()">
+        Next ⏭️
+    </button>
 
-    <button class="next" onclick="nextSlide()">Next ⏭️</button>
 </div>
 
-
-<!-- SLIDE 3 RSVP -->
-<!-- SLIDE 3 RSVP -->
+<!-- RSVP -->
 <div class="slide">
+
     <div class="rsvp-card">
 
         <h2>Will you join us? 💙</h2>
 
         <!-- OPTIONS -->
         <div class="rsvp-options">
-            <button class="option-btn" onclick="selectOption('Yes', this)">
+
+            <button type="button" class="option-btn"
+                onclick="selectOption('Yes', this)">
                 💙 Yes, I’ll be there
             </button>
 
-            <button class="option-btn" onclick="selectOption('No', this)">
+            <button type="button" class="option-btn"
+                onclick="selectOption('No', this)">
                 🤍 Sorry, I can’t
             </button>
+
         </div>
 
         <!-- NAME -->
         <div class="input-group">
-            <input type="text" id="guestName" required>
+
+            <input
+                type="text"
+                id="guestName"
+                placeholder=" "
+                required
+            >
+
             <label>Your Name</label>
+
         </div>
 
-        <!-- NEW GUEST COUNT -->
+        <!-- GUEST COUNT -->
         <div class="input-group">
-            <input type="number" id="guestCount" min="1" required>
+
+            <input
+                type="number"
+                id="guestCount"
+                placeholder=" "
+                min="1"
+                required
+            >
+
             <label>How many will attend on your side?</label>
+
         </div>
 
         <!-- SUBMIT -->
-        <button class="submit-btn" onclick="submitRSVP()">Send💌</button>
+        <button type="button"
+            class="submit-btn"
+            onclick="submitRSVP()">
 
-        <!-- MESSAGE -->
+            Send 💌
+
+        </button>
+
         <p id="rsvpMessage"></p>
 
     </div>
+
 </div>
 
-<!-- ✅ SLIDE 4 (RESTORED) -->
+<!-- FINAL -->
 <div class="slide">
+
     <h2>You're Invited 💙</h2>
+
     <p>📍 Calapan City, Oriental Mindoro</p>
 
     <a href="https://www.google.com/maps" target="_blank">
-        <button class="next">Open Map 📍</button>
+
+        <button type="button" class="next">
+            Open Map 📍
+        </button>
+
     </a>
+
 </div>
 
 <script>
@@ -424,123 +472,199 @@ let current = 0;
 const slides = document.querySelectorAll(".slide");
 
 function showSlide(i){
-    slides.forEach((s,index)=>{
-        s.classList.toggle("active", index === i);
+
+    slides.forEach((slide,index)=>{
+
+        slide.classList.toggle("active", index === i);
+
     });
+
 }
 
+/* NEXT SLIDE */
 function nextSlide(){
 
-    const video = document.getElementById("invVideo");
-    if (video) {
-        video.pause();
+    const currentSlide = slides[current];
+
+    const currentVideo = currentSlide.querySelector("video");
+
+    if(currentVideo){
+        currentVideo.pause();
     }
 
-    if(current < slides.length-1){
+    if(current < slides.length - 1){
+
         current++;
+
         showSlide(current);
+
+        const nextVideo = slides[current].querySelector("video");
+
+        if(nextVideo){
+
+            nextVideo.play().catch(err=>{
+                console.log("Video autoplay blocked:", err);
+            });
+
+        }
+
     }
+
 }
 
+/* OPEN CINEMATIC */
 function openCinematic(){
+
     const env = document.querySelector(".envelope-lux");
+
     const music = document.getElementById("bgMusic");
 
     env.classList.add("open");
 
-    /* 🎵 MUSIC FADE-IN */
+    /* MUSIC */
     music.volume = 0;
-    music.play();
+
+    music.play().catch(err=>{
+        console.log("Music autoplay blocked:", err);
+    });
 
     let vol = 0;
+
     const fade = setInterval(()=>{
+
         if(vol < 1){
+
             vol += 0.05;
+
             music.volume = vol;
-        } else {
+
+        }else{
+
             clearInterval(fade);
+
         }
+
     },150);
 
-    /* ✨ SPARKLES */
+    /* SPARKLES */
     for(let i=0;i<25;i++){
+
         const s = document.createElement("div");
-        s.className="sparkle";
-        s.innerHTML="✨";
-        s.style.left=Math.random()*100+"vw";
-        s.style.top="60%";
+
+        s.className = "sparkle";
+
+        s.innerHTML = "✨";
+
+        s.style.left = Math.random()*100 + "vw";
+
+        s.style.top = "60%";
+
         document.body.appendChild(s);
+
         setTimeout(()=>s.remove(),2000);
+
     }
 
-    /* 🎬 TRANSITION TO LETTER */
+    /* GO TO LETTER */
     setTimeout(()=>{
-        current = 1; // go to letter slide
+
+        current = 1;
+
         showSlide(current);
+
     },1400);
+
 }
+
 /* HEARTS */
 setInterval(()=>{
+
     const heart = document.createElement("div");
+
     heart.className = "heart";
+
     heart.style.left = Math.random()*100 + "vw";
+
     heart.innerHTML = "💙";
+
     document.body.appendChild(heart);
+
     setTimeout(()=>heart.remove(),8000);
+
 },1000);
 
 /* RSVP */
 let selectedAnswer = "";
 
-function selectOption(answer, btn) {
+/* SELECT OPTION */
+function selectOption(answer, btn){
+
     selectedAnswer = answer;
-    document.querySelectorAll(".option-btn").forEach(b => b.classList.remove("active"));
+
+    document.querySelectorAll(".option-btn").forEach(b=>{
+
+        b.classList.remove("active");
+
+    });
+
     btn.classList.add("active");
+
 }
 
-function submitRSVP() {
+/* SUBMIT RSVP */
+function submitRSVP(){
 
     const name = document.getElementById("guestName").value.trim();
+
     const guestCount = document.getElementById("guestCount").value;
+
     const message = document.getElementById("rsvpMessage");
 
-    if (!name || !guestCount || !selectedAnswer) {
+    if(!name || !guestCount || !selectedAnswer){
+
         message.innerHTML = "⚠️ Please complete all fields.";
+
         return;
+
     }
 
     message.innerHTML = "Sending... 💙";
 
-    fetch("https://script.google.com/macros/s/AKfycbxdK4rkvTNMk20B2RDSy5OM8ZBjMyqKByVaRtzWdb1vV3lI8oCVB5uBXJsNCxqhzK0j/exec", {
+    fetch("https://script.google.com/macros/s/AKfycbxdK4rkvTNMk20B2RDSy5OM8ZBjMyqKByVaRtzWdb1vV3lI8oCVB5uBXJsNCxqhzK0j/exec",{
 
-        method: "POST",
+        method:"POST",
 
-        mode: "no-cors",
+        mode:"no-cors",
 
-        headers: {
-            "Content-Type": "text/plain"
+        headers:{
+            "Content-Type":"text/plain"
         },
 
-        body: JSON.stringify({
-            name: name,
-            attendance: selectedAnswer,
-            guests: guestCount
+        body:JSON.stringify({
+
+            name:name,
+            attendance:selectedAnswer,
+            guests:guestCount
+
         })
 
     })
 
-    .then(() => {
+    .then(()=>{
 
         message.innerHTML = `🎉 Thank you, ${name}!`;
 
-        setTimeout(() => {
+        setTimeout(()=>{
+
             current = slides.length - 1;
+
             showSlide(current);
-        }, 1500);
+
+        },1500);
 
     })
 
-    .catch((err) => {
+    .catch((err)=>{
 
         console.log(err);
 
@@ -548,17 +672,18 @@ function submitRSVP() {
 
     });
 
-	
-	const video = document.getElementById("invVideo");
-
-video.addEventListener("ended", () => {
-    video.pause();
-    video.currentTime = 0; // or leave it at last frame if you prefer
-});
-video.addEventListener("ended", () => {
-    video.pause();
-});
 }
+
+/* VIDEO END */
+const video = document.getElementById("invVideo");
+
+video.addEventListener("ended", ()=>{
+
+    video.pause();
+
+    video.currentTime = 0;
+
+});
 </script>
 
 </body>
