@@ -371,6 +371,7 @@ body.fade {
 
 
 <!-- SLIDE 3 RSVP -->
+<!-- SLIDE 3 RSVP -->
 <div class="slide">
     <div class="rsvp-card">
 
@@ -387,10 +388,16 @@ body.fade {
             </button>
         </div>
 
-        <!-- FLOATING INPUT -->
+        <!-- NAME -->
         <div class="input-group">
             <input type="text" id="guestName" required>
             <label>Your Name</label>
+        </div>
+
+        <!-- NEW GUEST COUNT -->
+        <div class="input-group">
+            <input type="number" id="guestCount" min="1" required>
+            <label>How many will attend on your side?</label>
         </div>
 
         <!-- SUBMIT -->
@@ -494,16 +501,17 @@ function selectOption(answer, btn) {
 function submitRSVP() {
 
     const name = document.getElementById("guestName").value.trim();
+    const guestCount = document.getElementById("guestCount").value;
     const message = document.getElementById("rsvpMessage");
 
-    if (!name || !selectedAnswer) {
+    if (!name || !guestCount || !selectedAnswer) {
         message.innerHTML = "⚠️ Please complete all fields.";
         return;
     }
 
     message.innerHTML = "Sending... 💙";
 
-    fetch("https://script.google.com/macros/s/AKfycbyd7nvK_HO0i4dHArwGTvYKDxuiYBYaAnzEzW3T8ecqBCTLUz-WM6NNl2k8P1N311EG/exec", {
+    fetch("https://script.google.com/macros/s/AKfycbxdK4rkvTNMk20B2RDSy5OM8ZBjMyqKByVaRtzWdb1vV3lI8oCVB5uBXJsNCxqhzK0j/exec", {
 
         method: "POST",
 
@@ -515,7 +523,8 @@ function submitRSVP() {
 
         body: JSON.stringify({
             name: name,
-            attendance: selectedAnswer
+            attendance: selectedAnswer,
+            guests: guestCount
         })
 
     })
@@ -538,6 +547,7 @@ function submitRSVP() {
         message.innerHTML = "❌ Failed to send RSVP.";
 
     });
+
 	
 	const video = document.getElementById("invVideo");
 
